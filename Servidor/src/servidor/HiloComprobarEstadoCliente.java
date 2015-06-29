@@ -34,7 +34,7 @@ public class HiloComprobarEstadoCliente extends Thread{
             byte[] m = mensaje.getBytes();
             // host y puerto a enviar requerimiento
             InetAddress host = InetAddress.getByName(ip_cliente);
-            int puerto_cli = 7000;
+            int puerto_cli = 9900;
             // mensaje a enviar
             DatagramPacket msj = new DatagramPacket(m, m.length, host, puerto_cli);
             // envio
