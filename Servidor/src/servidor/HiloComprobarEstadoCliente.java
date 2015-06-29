@@ -43,6 +43,7 @@ public class HiloComprobarEstadoCliente extends Thread{
                 } else {
                     mostrar_clienteList(ip_cliente);
                 }
+              aSocket.close();
             } catch (SocketException e) {
                System.out.println(e.getMessage());
             }
