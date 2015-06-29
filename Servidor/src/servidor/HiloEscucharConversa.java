@@ -30,7 +30,6 @@ public class HiloEscucharConversa extends Thread{
     
     
     private void recibir_mensajes() throws UnknownHostException, IOException { 
-        try {
           while (true) {  
             InetAddress grupo = InetAddress.getByName(ip_multicast);
             MulticastSocket s = new MulticastSocket(puerto_multi);
@@ -45,10 +44,7 @@ public class HiloEscucharConversa extends Thread{
                 String usuario = msj.substring(0, msj.indexOf("@"));
                 agregarUsuarioList(usuario, recepcion.getAddress().getHostAddress());
             } 
-          }
-        } catch (Throwable ex) {
-            System.out.println("eroroor de hilo"+ex.getMessage());
-        }
+          }     
     }
 
     private void agregarUsuarioList(String usuario, String ip) {
