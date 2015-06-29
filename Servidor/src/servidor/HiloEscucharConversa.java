@@ -40,14 +40,14 @@ public class HiloEscucharConversa extends Thread{
             DatagramPacket recepcion = new DatagramPacket(buffer, buffer.length);
             s.receive(recepcion);
             String msj = new String(recepcion.getData(), 0, recepcion.getLength());
-            s.leaveGroup(grupo); 
+//            s.leaveGroup(grupo); 
             if (msj.contains("@")) {
                 String usuario = msj.substring(0, msj.indexOf("@"));
                 agregarUsuarioList(usuario, recepcion.getAddress().getHostAddress());
             } 
           }
         } catch (Throwable ex) {
-           // System.out.println("eroroor de hilo"+ex.getMessage());
+            System.out.println("eroroor de hilo"+ex.getMessage());
         }
     }
 
