@@ -50,7 +50,7 @@ public class Cliente {
             Pattern USUARIO_PATTERN = Pattern.compile(USUARIO);
             if (USUARIO_PATTERN.matcher(parametro[0]).matches()) {//valida el usuario
                 nombre_usuario = parametro[0];
-                if (IPV4_PATTERN.matcher(parametro[1]).matches()) {//valida la ip
+                if (IPV4_PATTERN.matcher(parametro[1]).matches() || parametro[1].equals("localhost")) {//valida la ip
                     servidor_IP = parametro[1];
                     if (PUERTO_PATTERN.matcher(parametro[2]).matches()) {//valida EL PUERTO TCP
                         servidor_puerto = Integer.parseInt(parametro[2].trim());
@@ -78,11 +78,12 @@ public class Cliente {
                         //creo un hilo para enviar mensajes
                         new Thread(new HiloMulticastEnviar(ip_multicast, puerto_multicast, nombre_usuario)).start();
                         //creo un hilo para recibir mensajes
-                        new Thread(new HiloMulticastRecibir(ip_multicast, puerto_multicast)).start();
-                    }
-                    //comprobar el estado del cliente
-                    new Thread(new HiloComprobarEstado(servidor_IP,servidor_puerto)).start();
+                        new Thread(new HiloMulticastRecibir(ip_multicast, puerto_multicast)).start(); 
+                        //comprobar el estado del cliente
+                        new Thread(new HiloComprobarEstado(servidor_IP,servidor_puerto)).start();
 
+                    }
+                  
 
                 } catch (ClassNotFoundException ex) {
                     System.out.println(ex.getMessage());
