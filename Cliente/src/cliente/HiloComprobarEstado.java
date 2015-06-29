@@ -48,9 +48,11 @@ public class HiloComprobarEstado extends Thread {
                             "ok".getBytes().length, requerimiento.getAddress(),
                             requerimiento.getPort());
                     // envio
-                    aSocket.send(respuesta);
+                    aSocket.send(respuesta); 
+                    aSocket.close();
                 }
             }
+           
             // manejo de errores
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
