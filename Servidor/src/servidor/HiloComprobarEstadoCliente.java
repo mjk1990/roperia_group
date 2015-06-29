@@ -26,9 +26,7 @@ public class HiloComprobarEstadoCliente extends Thread{
     }
 
     public void udpServidor() {
-        try ( // socket
-            DatagramSocket aSocket = new DatagramSocket() // cierrro el socket
-        ) {
+        try{
             String mensaje = "activo";
             // buffer
             byte[] m = mensaje.getBytes();
@@ -38,6 +36,7 @@ public class HiloComprobarEstadoCliente extends Thread{
             // mensaje a enviar
             DatagramPacket msj = new DatagramPacket(m, m.length, host, puerto_cli);
             // envio
+            DatagramSocket aSocket = new DatagramSocket();
             aSocket.send(msj);
             // paquete mensaje a recibir
             byte[] buffer = new byte[1000];
