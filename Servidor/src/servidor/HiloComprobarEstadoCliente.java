@@ -28,32 +28,28 @@ public class HiloComprobarEstadoCliente extends Thread{
     public void udpServidor() {
         try{
             String mensaje = "activo";
-            // buffer
             byte[] m = mensaje.getBytes();
-            // host y puerto a enviar requerimiento
             InetAddress host = InetAddress.getByName(ip_cliente);
             int puerto_cli = 9900;
-            // mensaje a enviar
             DatagramPacket msj = new DatagramPacket(m, m.length, host, puerto_cli);
-            // envio
-            DatagramSocket aSocket = new DatagramSocket();
-            aSocket.send(msj);
-            // paquete mensaje a recibir
-            byte[] buffer = new byte[1000];
-            DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length);
-            aSocket.receive(respuesta);
-            String respcli=new String(respuesta.getData());//respuesta del cliente
-            if (!respcli.equals("ok")) {
-                eliminar_clienteList(ip_cliente);
-            } else {
-                mostrar_clienteList(ip_cliente);
+            try (DatagramSocket aSocket = new DatagramSocket()) {
+                aSocket.send(msj);
+                byte[] buffer = new byte[1000];
+                DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length);
+                aSocket.receive(respuesta);
+                String respcli=new String(respuesta.getData());//respuesta del cliente
+                if (!respcli.equals("ok")) {
+                    eliminar_clienteList(ip_cliente);
+                } else {
+                    mostrar_clienteList(ip_cliente);
+                }
+            } catch (SocketException e) {
+               System.out.println(e.getMessage());
             }
-            // manejo de errores
-            aSocket.close();
         } catch (SocketException e) {
-            System.out.println("Socket: " + e.getMessage());
+            System.out.println(e.getMessage());
         } catch (IOException e) {
-            System.out.println("IO: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     
