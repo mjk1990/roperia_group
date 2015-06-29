@@ -39,7 +39,7 @@ public class HiloMulticastRecibir extends Thread{
               String mensaje=msj.substring(msj.indexOf("@")+1,msj.length());
               System.out.println(usuario+" ---> "+mensaje);
             }
-           // s.leaveGroup(grupo);
+            s.leaveGroup(grupo);
         } catch (SocketException e) {
             System.out.println("Socket: " + e.getMessage());
         } catch (IOException e) {

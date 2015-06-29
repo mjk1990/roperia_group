@@ -58,11 +58,6 @@ public class HiloComprobarEstado extends Thread {
             System.out.println("Socket: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("IO: " + e.getMessage());
-        } finally {
-            if (aSocket != null) {
-                // cierrro el socket
-                aSocket.close();
-            }
-        }
+        } 
     }
 }
