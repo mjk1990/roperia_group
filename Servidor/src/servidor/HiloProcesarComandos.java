@@ -45,7 +45,6 @@ public class HiloProcesarComandos extends Thread {
     }
 
     private void listarClientes() {
-        System.out.println("valor"+Servidor.usuariosConectados.size());
         for(HashMap m:Servidor.usuariosConectados){
             Iterator<Map.Entry<String, String>> ite = m.entrySet().iterator();
             String valor = null;
