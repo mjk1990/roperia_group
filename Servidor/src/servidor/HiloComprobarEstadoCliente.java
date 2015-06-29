@@ -73,12 +73,14 @@ public class HiloComprobarEstadoCliente extends Thread{
     }
     
     private void mostrar_clienteList(String ip){ 
-       for (HashMap mapa : Servidor.usuariosConectados) {
+        for (Iterator<HashMap> it = Servidor.usuariosConectados.iterator(); it.hasNext();) {
+            HashMap mapa = it.next();
             Iterator<Map.Entry<String, String>> ite = mapa.entrySet().iterator();
             while (ite.hasNext()) {
                 Map.Entry<String, String> e = ite.next();
                 if (e.getKey().equals("ip")) {
                    if(e.getValue().contains(ip)){
+                     System.out.println(e.getValue());
                      break;
                    } 
                 }
